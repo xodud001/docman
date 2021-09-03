@@ -34,34 +34,34 @@ public class UserService implements UserDetailsService {
 
     public void addAuthority(String userId, String authority){
 
-        userRepository.findById(userId).ifPresent(user->{
-            UserAuthority newRole = new UserAuthority(user.getUsername(), authority);
-            if(user.getAuthorities() == null){
-                HashSet<UserAuthority> authorities = new HashSet<>();
-                authorities.add(newRole);
-                user.setAuthorities(authorities);
-                save(user);
-            }else if(!user.getAuthorities().contains(newRole)){
-                HashSet<UserAuthority> authorities = new HashSet<>(user.getAuthorities());
-
-                authorities.add(newRole);
-                user.setAuthorities(authorities);
-                save(user);
-            }
-        });
+//        userRepository.findById(userId).ifPresent(user->{
+//            UserAuthority newRole = new UserAuthority(user.getUsername(), authority);
+//            if(user.getAuthorities() == null){
+//                HashSet<UserAuthority> authorities = new HashSet<>();
+//                authorities.add(newRole);
+//                user.setAuthorities(authorities);
+//                save(user);
+//            }else if(!user.getAuthorities().contains(newRole)){
+//                HashSet<UserAuthority> authorities = new HashSet<>(user.getAuthorities());
+//
+//                authorities.add(newRole);
+//                user.setAuthorities(authorities);
+//                save(user);
+//            }
+//        });
     }
 
     public void removeAuthority(String userId, String authority){
-        userRepository.findById(userId).ifPresent(user->{
-            if(user.getAuthorities()==null) return;
-            UserAuthority targetRole = new UserAuthority(user.getUsername(), authority);
-            if(user.getAuthorities().contains(targetRole)){
-                user.setAuthorities(
-                        user.getAuthorities().stream().filter(auth->!auth.equals(targetRole))
-                                .collect(Collectors.toSet())
-                );
-                save(user);
-            }
-        });
+//        userRepository.findById(userId).ifPresent(user->{
+//            if(user.getAuthorities()==null) return;
+//            UserAuthority targetRole = new UserAuthority(user.getUsername(), authority);
+//            if(user.getAuthorities().contains(targetRole)){
+//                user.setAuthorities(
+//                        user.getAuthorities().stream().filter(auth->!auth.equals(targetRole))
+//                                .collect(Collectors.toSet())
+//                );
+//                save(user);
+//            }
+//        });
     }
 }

@@ -25,7 +25,7 @@ public class JWTRequestTest extends WebIntegrationTest {
     @BeforeEach
     void before(){
         userRepository.deleteAll();
-        userService.save()
+//        userService.save()
     }
 
     @DisplayName("1. hello 메시지 수신")
