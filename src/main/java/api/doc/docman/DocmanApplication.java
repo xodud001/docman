@@ -1,8 +1,6 @@
 package api.doc.docman;
+import api.doc.docman.di.*;
 
-import api.doc.docman.di.ApplicationContextProvider;
-import api.doc.docman.di.Base64Encoder;
-import api.doc.docman.di.Encoder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -16,10 +14,16 @@ public class DocmanApplication {
 		String url = "www.naver.com/user/it";
 		ApplicationContext context = ApplicationContextProvider.getContext();
 
-		Base64Encoder base64Encoder = context.getBean(Base64Encoder.class);
-		Encoder encoder = new Encoder(base64Encoder);
+//		Base64Encoder base64Encoder = context.getBean(Base64Encoder.class);
+		Encoder encoder = context.getBean(Encoder.class);
 		String result = encoder.encode(url);
 		System.out.println(result);
+ 
+//		UrlEncoder urlEncoder = context.getBean(UrlEncoder.class);
+//		encoder.setIEncoder(urlEncoder);
+//		result = encoder.encode(url);
+//		System.out.println(result);
+
 	}
 
 }
