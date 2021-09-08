@@ -1,6 +1,7 @@
 package api.doc.docman.controller;
 
 
+import api.doc.docman.annotation.TImer;
 import api.doc.docman.domain.RestUser;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,5 +17,13 @@ public class RestApiController {
     @PostMapping("/post")
     public RestUser post(@RequestBody RestUser user){
         return user;
+    }
+
+
+    @TImer
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) throws InterruptedException {
+        Thread.sleep(2000);
+        return "delete method : " + id;
     }
 }
