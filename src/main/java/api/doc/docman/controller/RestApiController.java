@@ -5,6 +5,8 @@ import api.doc.docman.annotation.TImer;
 import api.doc.docman.domain.RestUser;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 public class RestApiController {
@@ -15,7 +17,8 @@ public class RestApiController {
     }
 
     @PostMapping("/post")
-    public RestUser post(@RequestBody RestUser user){
+    public RestUser post(@Valid @RequestBody RestUser user){
+        System.out.println(user);
         return user;
     }
 

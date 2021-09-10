@@ -16,10 +16,10 @@ public class TimerAop {
     private void cut(){}
 
 
-    @Pointcut("@annotation(api.doc.docman.annotation.TImer)")
+//    @Pointcut("@annotation(api.doc.docman.annotation.TImer)")
     private void enableTimer(){}
 
-    @Around("cut() && enableTimer()")
+//    @Around("cut() && enableTimer()")
     public void around(ProceedingJoinPoint joinPoint) throws Throwable {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
