@@ -3,6 +3,10 @@ package api.doc.docman.controller;
 
 import api.doc.docman.annotation.TImer;
 import api.doc.docman.domain.RestUser;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,9 +21,22 @@ public class RestApiController {
     }
 
     @PostMapping("/post")
-    public RestUser post(@Valid @RequestBody RestUser user){
-        System.out.println(user);
-        return user;
+    public ResponseEntity post(@Valid @RequestBody RestUser user, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+            StringBuilder sb = new StringBuilder();
+            bindingResult.getAllErrors().forEach(objectError -> {
+                FieldError field = (FieldError)objectError;
+                String message = objectError.getDefaultMessage();
+
+                System.out.println("field : " + field.getField());
+                System.out.println("message : " + message);
+                sb.append("field : ").append(field.getField());
+                sb.append("message : ").append(message);
+            });
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sb.toString());
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
 
