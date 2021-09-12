@@ -7,10 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,4 +33,16 @@ public class RestUser {
     @JsonProperty("phone_number")
     private String phoneNumber;
 
+    @Size(max = 6, min = 6)
+    private String reqYearMonth;// yyyyMM
+
+    @AssertTrue(message ="날짜 형식이 맞지않습니다. yyyyMM")
+    public boolean isReqYearMonthValidation(){
+        try{
+            LocalDate localDate = LocalDate.parse(getReqYearMonth() + "01", DateTimeFormatter.ofPattern("yyyyMMdd"));
+        }catch(Exception e){
+            return false;
+        }
+        return true;
+    }
 }
