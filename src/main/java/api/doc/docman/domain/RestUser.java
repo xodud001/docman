@@ -1,6 +1,7 @@
 package api.doc.docman.domain;
 
 
+import api.doc.docman.annotation.YearMonth;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,16 +34,7 @@ public class RestUser {
     @JsonProperty("phone_number")
     private String phoneNumber;
 
-    @Size(max = 6, min = 6)
-    private String reqYearMonth;// yyyyMM
+    @YearMonth
+    private String reqYearMonth;
 
-    @AssertTrue(message ="날짜 형식이 맞지않습니다. yyyyMM")
-    public boolean isReqYearMonthValidation(){
-        try{
-            LocalDate localDate = LocalDate.parse(getReqYearMonth() + "01", DateTimeFormatter.ofPattern("yyyyMMdd"));
-        }catch(Exception e){
-            return false;
-        }
-        return true;
-    }
 }
