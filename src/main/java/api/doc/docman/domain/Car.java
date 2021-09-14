@@ -6,17 +6,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 
 public class Car {
-    private String name
-            ;
+    @NotBlank
+    private String name;
+
+    @NotBlank
     @JsonProperty("car_number")
     private String carNumber;
 
+    @NotBlank
     @JsonProperty("TYPE")
     private String type;
 }
